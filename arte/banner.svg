@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1026"/><stop offset="1" stop-color="#1c2a55"/></linearGradient>
+    <radialGradient id="luna" cx="0.4" cy="0.4"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#e8dcae"/></radialGradient>
+    <radialGradient id="halo"><stop offset="0.5" stop-color="#f2d27a" stop-opacity="0.35"/><stop offset="1" stop-color="#f2d27a" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="320" height="180" fill="url(#cielo)"/>
+  <g fill="#fff" opacity="0.7"><circle cx="30" cy="22" r="1.2"/><circle cx="90" cy="40" r="1"/><circle cx="150" cy="18" r="1.3"/><circle cx="200" cy="52" r="0.9"/><circle cx="60" cy="70" r="1"/><circle cx="300" cy="96" r="1.1"/></g>
+  <circle cx="250" cy="70" r="70" fill="url(#halo)"/>
+  <circle cx="250" cy="70" r="44" fill="url(#luna)"/>
+  <path d="M0 156 Q70 140 140 154 Q200 146 230 152 Q280 140 320 150 V180 H0 Z" fill="#06080f"/>
+  <g transform="translate(246 152) scale(1.05)"><path fill="#06080f" d="M-14 0 L-16 -28 Q-16 -46 -20 -58 L-31 -77 L-28 -80 L-16 -71 L-12 -81 L-8 -88 L-5 -73 Q4 -60 10 -42 Q24 -30 24 -12 Q34 -10 44 -3 L40 0 Z"/></g>
+  <text x="22" y="86" font-family="Georgia, serif" font-size="38" font-weight="700" fill="#f2e6c4">Hombre</text>
+  <text x="22" y="124" font-family="Georgia, serif" font-size="38" font-weight="700" fill="#f2e6c4">Lobo</text>
+</svg>

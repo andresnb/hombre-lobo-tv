@@ -1,0 +1,28 @@
+# Cada cambio en main compila la app firmada y la publica como la última versión.
+# La app instalada lee version.json de la última versión y ofrece actualizar.
+name: APK
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions: { contents: write }
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.11.1' }
+      - name: Compilar
+        env: { FIRMA_B64: '${{ secrets.FIRMA_B64 }}', FIRMA_CLAVE: '${{ secrets.FIRMA_CLAVE }}' }
+        run: |
+          echo "$FIRMA_B64" | base64 -d > "$RUNNER_TEMP/firma.p12"
+          FIRMA_ARCHIVO="$RUNNER_TEMP/firma.p12" gradle assembleRelease -PversionCode=${{ github.run_number }}
+      - name: Publicar
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          n=${{ github.run_number }}
+          cp app/build/outputs/apk/release/app-release.apk hombre-lobo-tv.apk
+          echo "{\"versionCode\": $n, \"versionName\": \"1.$((n-1))\", \"url\": \"https://github.com/${{ github.repository }}/releases/download/v1.$((n-1))/hombre-lobo-tv.apk\"}" > version.json
+          gh release create "v1.$((n-1))" hombre-lobo-tv.apk version.json --title "Versión 1.$((n-1))" --notes "${{ github.event.head_commit.message }}"
